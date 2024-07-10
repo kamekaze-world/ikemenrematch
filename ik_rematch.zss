@@ -1,0 +1,28 @@
+[statedef -2]
+
+ignorehitpause if  roundstate=3 && map(ik_rematch_on) || roundstate=4 && map(ik_rematch)
+{
+assertspecial{flag:roundnotskip;flag2:roundnotover}
+
+if teamside=1 && !numexplod(1900) {
+
+
+ Explod{anim : F19000
+;ID :1900
+;pos : 160,119
+;postype : back 
+;facing : 1
+;vfacing : 1
+;bindtime : 1
+;removetime : -1
+;pausemovetime : 999
+;scale : 3,2
+;sprpriority :-4
+;removeongethit : 0
+;trans : addalpha
+;alpha :256, 128
+}
+}
+
+
+}
