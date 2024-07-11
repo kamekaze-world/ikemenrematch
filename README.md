@@ -23,7 +23,7 @@ The positions offsets and spacings are based on the localcoord of your screenpac
 follow the same logic pattern as Ikemen Go's base screenpack.
 
 ## Instructions
-You must first insert the following code into your system.def file. From there, configure the values
+Place all files from the zip into **external/mods** (You can delete the readme file). Then you must first insert the following code into your system.def file. From there, configure the values
 to your liking and preference. If you intend to use the **victoryscreen** parameter, you must alter your
 **start.lua** at this time. Refer to the code below the rematch settings for your **start.lua** changes This may not be required in the future so follow current advice while reading this.
 Everything else should work from this point on.
