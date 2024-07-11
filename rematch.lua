@@ -2,11 +2,9 @@
 --This mod adds rematch support to any fight unless specified otherwise
 --by turning on the ik_rematch.override value
 --All values otherwise depend on the screenpack values under [Rematch]
---DO NOT TOUCH ANY CODE IN THIS FILE WITHOUT KNOWING WHAT IT ALL DOES. 
---THERE IS NO REASON TO TOUCH THIS FILE IN GENERAL!!!
+
 --It will trigger when the starttime reaches 0, also based on your screenpack settings.
 commonStatesInsert('external/mods/ik_rematch.zss')
-
 ik_rematch = {}
 
 ik_rematch.main = main.f_createTextImg(motif.rematch, 'rematch')
@@ -47,7 +45,7 @@ if not ik_rematch.override and motif.rematch.victoryscreen==0 then
 
 
 local canRematch = ((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle')) 
-print(gamemode(),canRematch)
+
 if  matchover() then
 charMapSet(1,'ik_rematch_on',1,'set')
 charMapSet(2,'ik_rematch_on',1,'set')
@@ -238,9 +236,13 @@ end
 end
 end
  hook.add("loop", "rematch", ik_rematch.run)
- 
+ local victoryend=false
 function ik_rematch.victory() 
 
+if start.t_victory ~=nil then
+victoryend = start.t_victory.textend
+end
+ 
 if motif.rematch.victoryscreen==0 or motif.rematch.endabled==0 then
 ik_rematch.done={true,true}
 end
@@ -248,7 +250,7 @@ end
 if not ik_rematch.override and motif.rematch.victoryscreen>=1 then
 
 local canRematch = ((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle')) 
-
+print(gamemode(),canRematch)
 if hv==0 and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time-5 then
 hv = start.t_victory.counter- start.t_victory.textcnt
 
@@ -261,11 +263,10 @@ charMapSet(1,'ik_rematch_on',1,'set')
 charMapSet(2,'ik_rematch_on',1,'set')
 end
 
-if  motif.rematch.enabled>=1 and matchover() and ( roundstate()==-1)  and (canRematch or map('ik_rematch')>0) then 
-if starttime>0 then
-starttime=starttime-1
+if  motif.rematch.enabled>=1 and matchover() and ( roundstate()==-1)  and (canRematch or map('ik_rematch')>0) and victoryend  then 
 
-else
+
+
 if not ik_rematch.done[1] or not ik_rematch.done[2] then
 charMapSet(1,'ik_rematch',1,'set')
 charMapSet(2,'ik_rematch',1,'set')
@@ -274,7 +275,7 @@ if hv>0 then
 start.t_victory.counter = hv
 end
 end
-end
+
 
 
 
