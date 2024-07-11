@@ -2,7 +2,8 @@
 --This mod adds rematch support to any fight unless specified otherwise
 --by turning on the ik_rematch.override value
 --All values otherwise depend on the screenpack values under [Rematch]
-
+--DO NOT TOUCH ANY CODE IN THIS FILE WITHOUT KNOWING WHAT IT ALL DOES. 
+--THERE IS NO REASON TO TOUCH THIS FILE IN GENERAL!!!
 --It will trigger when the starttime reaches 0, also based on your screenpack settings.
 commonStatesInsert('external/mods/ik_rematch.zss')
 
