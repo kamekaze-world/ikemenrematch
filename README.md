@@ -29,9 +29,10 @@ to your liking and preference. If you intend to use the **victoryscreen** parame
 Everything else should work from this point on.
 
 ```
+;---------------------------------------
 ;to override this set "ik_rematch.override" to true in a lua mod file.
 [Rematch]
-enabled=0
+enabled=1
 accept.key = "a&b&c&x&y&z&s"
 ;if 1, game will pause when rematch appears, use map "ik_rematch" to detect 
 ;when rematch screen is active.
@@ -42,11 +43,15 @@ rematch.offset=150,70
 rematch.font = 3,0,0
 rematch.scale = 2,2
 ;This will call the rematch screen on the victory screen instead of the end of match.
-victoryscreen=0
+victoryscreen=1
 p1.font = 3,0,0,128,128,128
 p1.active.font=3,0,0,255,0,0
 p1.offset = 80,150
 p1.spacing=0,20
+;you can adjust the offset for any given gamemode with the format
+;<gamemode>.p1.offset example below:
+;versus.p1.offset =220,150
+;versus.p1.spacing =0,10
 p1.scale =1,1
 p1.yes.text="Yes"
 p1.no.text="No"
@@ -57,11 +62,19 @@ p2.font = 3,0,0,128,128,128
 p2.active.font=3,0,0,0,0,255
 p2.offset = 220,150
 p2.spacing=0,20
+;you can adjust the offset for any given gamemode with the format
+;<gamemode>.p2.offset example below:
+;versus.p2.offset =220,150
+;versus.p2.spacing =0,10
 p2.yes.text="Yes"
 p2.no.text="No"
 p2.scale =1,1
 p2.cursor.snd=100,0
 p2.done.snd=100,1
+
+;enter all game modes rematch will trigger on. 
+;All modes enabled if omitted.
+;enabledmodes = "arcade","freebattle","teamcoop","versuscoop","versus"
 
 [RematchBGdef] 
 spr = ""
