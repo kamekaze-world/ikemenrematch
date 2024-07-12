@@ -26,6 +26,11 @@ ik_rematch.done={false,false}
 local fade =false
 local winadd=false
 
+function ik_rematch.rematchend()
+
+return ik_rematch.done[1] and ik_rematch.done[2]
+end
+
 local function rematchmode(p)
 local result = false
 
@@ -114,7 +119,7 @@ if starttime>0 then
 starttime=starttime-1
 
 else
-if not ik_rematch.done[1] or not ik_rematch.done[2] then
+if not ik_rematch.rematchend() then
 charMapSet(1,'ik_rematch',1,'set')
 charMapSet(2,'ik_rematch',1,'set')
 end
@@ -122,7 +127,7 @@ end
 
 
 
-if (player(1) and  map('ik_rematch') >0 and starttime==0 ) and (not ik_rematch.done[1] or not ik_rematch.done[2]) then
+if (player(1) and  map('ik_rematch') >0 and starttime==0 ) and (not ik_rematch.rematchend()) then
 if not fade and (motif.rematch.pausegame>=1 ) then
 togglePause(true)
 fade=true
@@ -271,7 +276,7 @@ end
 					    ik_rematch.done[2] =true
 					end
 					
-		if ik_rematch.done[1] and ik_rematch.done[2] then
+		if ik_rematch.rematchend() then
 		togglePause(false)
 		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
 		reload()
@@ -322,7 +327,7 @@ if  motif.rematch.enabled>=1 and matchover() and ( roundstate()==-1)  and (canRe
 
 
 
-if not ik_rematch.done[1] or not ik_rematch.done[2] then
+if not ik_rematch.rematchend() then
 charMapSet(1,'ik_rematch',1,'set')
 charMapSet(2,'ik_rematch',1,'set')
 --lock victory counter
@@ -334,7 +339,7 @@ end
 
 
 
-if (player(1) and  map('ik_rematch')>0  and starttime==0 or (roundstate()==-1 )) and (not ik_rematch.done[1] or not ik_rematch.done[2]) then
+if (player(1) and  map('ik_rematch')>0  and starttime==0 or (roundstate()==-1 )) and (not ik_rematch.rematchend()) then
 if not fade and (roundstate()==-1  and starttime==0 ) then
 togglePause(true)
 fade=true
@@ -481,7 +486,7 @@ end
 					    ik_rematch.done[2] =true
 					end
 					
-		if ik_rematch.done[1] and ik_rematch.done[2] then
+		if ik_rematch.rematchend() then
 		togglePause(false)
 		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
 		reload()
