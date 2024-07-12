@@ -15,6 +15,9 @@ ik_rematch.p = {}
 ik_rematch.pa={}
 ik_rematch.override=false
 
+
+
+
 local hv =0
 local txt_yes = {text:create({}),text:create({})}
 local txt_no = {text:create({}),text:create({})}
@@ -85,9 +88,6 @@ winadd=false
 hv =0
 end
 
-if not ik_rematch.override and motif.rematch.victoryscreen==0 then
-
-
 local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle'))) and enabled
 
 if  matchover() then
@@ -95,6 +95,7 @@ charMapSet(1,'ik_rematch_on',1,'set')
 charMapSet(2,'ik_rematch_on',1,'set')
 	   if not winadd then
 		if player(1) and win() then
+
 	   ik_rematch.wincount[1] = ik_rematch.wincount[1]+1
 	   else
 	    ik_rematch.wincount[2] = ik_rematch.wincount[2]+1
@@ -102,6 +103,11 @@ charMapSet(2,'ik_rematch_on',1,'set')
 	   winadd=true
 	   end
 end
+
+if not ik_rematch.override and motif.rematch.victoryscreen==0 then
+
+
+
 
 if  motif.rematch.enabled>=1 and matchover() and (roundstate()==4 )  and (canRematch or map('ik_rematch')>0) then 
 if starttime>0 then
