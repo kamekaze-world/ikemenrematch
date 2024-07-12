@@ -6,12 +6,15 @@
 --It will trigger when the starttime reaches 0, also based on your screenpack settings.
 commonStatesInsert('external/mods/ik_rematch.zss')
 ik_rematch = {}
-
-ik_rematch.main = main.f_createTextImg(motif.rematch, 'rematch')
+local starttime =0
+if motif.rematch ~= nil then
+ik_rematch.main = main.f_createTextImg(motif.rematch, 'rematch') 
+starttime=  motif.rematch.starttime
+end
 ik_rematch.p = {}
 ik_rematch.pa={}
 ik_rematch.override=false
-local starttime = motif.rematch.starttime
+
 local hv =0
 local txt_yes = {text:create({}),text:create({})}
 local txt_no = {text:create({}),text:create({})}
@@ -19,12 +22,53 @@ ik_rematch.cursor={true,true}
 ik_rematch.done={false,false}
 local fade =false
 local winadd=false
+
+local function rematchmode(p)
+local result = false
+
+if motif.rematch.enabledmodes==nil then
+return true
+end
+
+ for _, v in pairs(motif.rematch.enabledmodes) do
+        if v == gamemode() then 
+            result = true 
+        end
+    end
+
+
+return result
+end
+
+local function rematchtxtpos(p)
+
+if p== nil then
+if motif.rematch[gamemode()..'_rematch_offset'] == nil then
+return ''
+end
+
+ return gamemode()..'_'
+else
+
+if motif.rematch[gamemode()..'_p'..p..'_offset'] == nil then
+return ''
+end
+
+ return gamemode()..'_'
+ end
+end
+local enabled =true
 function ik_rematch.run()
+
+if motif.rematch ==nil then
+return 
+end
 
 charMapSet(1,'ikr_wincount',ik_rematch.wincount[1],'set')
 charMapSet(2,'ikr_wincount',ik_rematch.wincount[2],'set')
 
 if not ik_rematch.override and roundstart() then
+enabled=rematchmode()
 starttime = motif.rematch.starttime or 1
 if start.t_victory~=nil then
 start.t_victory.active=false
@@ -44,7 +88,7 @@ end
 if not ik_rematch.override and motif.rematch.victoryscreen==0 then
 
 
-local canRematch = ((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle')) 
+local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle'))) and enabled
 
 if  matchover() then
 charMapSet(1,'ik_rematch_on',1,'set')
@@ -86,8 +130,8 @@ end
 		bank =   motif.rematch.rematch_font[2],
 		align =  motif.rematch.rematch_font[3],
 		text =   motif.rematch.rematch_text,
-		x =      motif.rematch.rematch_offset[1],
-		y =    motif.rematch.rematch_offset[2],
+		x =      motif.rematch[rematchtxtpos()..'rematch_offset'][1],
+		y =    motif.rematch[rematchtxtpos()..'rematch_offset'][2],
 		scaleX = motif.rematch.rematch_scale[1],
 		scaleY = motif.rematch.rematch_scale[2],
 		r =      motif.rematch.rematch_font[4],
@@ -97,7 +141,7 @@ end
 					})
 	ik_rematch.main:draw()
 	
-		if player(1) and ailevel()==0 or gamemode('watch') then
+		if (player(1) and ailevel()==0 or gamemode('watch')) then
 			if not ik_rematch.done[1] then
 					
 				if  main.f_input({1}, main.f_extractKeys(motif.rematch.accept_key)) then
@@ -132,8 +176,8 @@ end
 						bank =   motif.rematch['p1_'..var..'font'][2],
 						align =  motif.rematch['p1_'..var..'font'][3],
 						text =   motif.rematch.p1_yes_text,
-							x =     motif.rematch.p1_offset[1] ,
-						y =    motif.rematch.p1_offset[2],
+							x =     motif.rematch[rematchtxtpos(1)..'p1_offset'][1] ,
+						y =    motif.rematch[rematchtxtpos(1)..'p1_offset'][2],
 						scaleX = motif.rematch.p1_scale[1],
 						scaleY =motif.rematch.p1_scale[2],
 					r =      motif.rematch['p1_'..var..'font'][4],
@@ -148,8 +192,8 @@ end
 						bank =   motif.rematch['p1_'..var2..'font'][2],
 						align =  motif.rematch['p1_'..var2..'font'][3],
 						text =   motif.rematch.p1_no_text,
-							x =     motif.rematch.p1_offset[1] + motif.rematch.p1_spacing[1],
-						y =    motif.rematch.p1_offset[2]+ motif.rematch.p1_spacing[2],
+							x =     motif.rematch[rematchtxtpos(1)..'p1_offset'][1] + motif.rematch[rematchtxtpos(1)..'p1_spacing'][1],
+						y =    motif.rematch[rematchtxtpos(1)..'p1_offset'][2]+ motif.rematch[rematchtxtpos(1)..'p1_spacing'][2],
 						scaleX = motif.rematch.p1_scale[1],
 						scaleY =motif.rematch.p1_scale[2],
 					r =      motif.rematch['p1_'..var2..'font'][4],
@@ -162,7 +206,7 @@ end
 					    ik_rematch.done[1] =true
 					end
 					
-					if player(2) and ailevel()==0 then
+					if (player(2) and ailevel()==0)  then
 					if not ik_rematch.done[2] then
 					
 					if main.f_input({2}, main.f_extractKeys(motif.rematch.accept_key))  then
@@ -191,8 +235,8 @@ end
 						bank =   motif.rematch['p2_'..var..'font'][2],
 						align =  motif.rematch['p2_'..var..'font'][3],
 						text =   motif.rematch.p2_yes_text,
-							x =     motif.rematch.p2_offset[1] ,
-						y =    motif.rematch.p2_offset[2],
+							x =     motif.rematch[rematchtxtpos(2)..'p2_offset'][1],
+						y =    motif.rematch[rematchtxtpos(2)..'p2_offset'][2],
 						scaleX = motif.rematch.p2_scale[1],
 						scaleY =motif.rematch.p2_scale[2],
 					r =      motif.rematch['p2_'..var..'font'][4],
@@ -207,8 +251,8 @@ end
 						bank =   motif.rematch['p2_'..var2..'font'][2],
 						align =  motif.rematch['p2_'..var2..'font'][3],
 						text =   motif.rematch.p2_no_text,
-							x =     motif.rematch.p2_offset[1] + motif.rematch.p2_spacing[1],
-						y =    motif.rematch.p2_offset[2]+ motif.rematch.p2_spacing[2],
+									x =     motif.rematch[rematchtxtpos(2)..'p2_offset'][1] + motif.rematch[rematchtxtpos(2)..'p2_spacing'][1],
+						y =    motif.rematch[rematchtxtpos(2)..'p2_offset'][2]+ motif.rematch[rematchtxtpos(2)..'p2_spacing'][2],
 						scaleX = motif.rematch.p2_scale[1],
 						scaleY =motif.rematch.p2_scale[2],
 					r =      motif.rematch['p2_'..var2..'font'][4],
@@ -239,6 +283,11 @@ end
  local victoryend=false
 function ik_rematch.victory() 
 
+if motif.rematch ==nil then
+return 
+end
+
+
 if start.t_victory ~=nil then
 victoryend = start.t_victory.textend
 end
@@ -249,7 +298,7 @@ end
 
 if not ik_rematch.override and motif.rematch.victoryscreen>=1 then
 
-local canRematch = ((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle')) 
+local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle'))) and rematchmode()
 print(gamemode(),canRematch)
 if hv==0 and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time-5 then
 hv = start.t_victory.counter- start.t_victory.textcnt
@@ -302,7 +351,7 @@ end
 					})
 	ik_rematch.main:draw()
 	
-		if player(1) and ailevel()==0 or gamemode('watch') then
+		if (player(1) and ailevel()==0 or gamemode('watch'))  then
 			if not ik_rematch.done[1] then
 					
 				if main.f_input({1}, main.f_extractKeys(motif.rematch.accept_key)) then
@@ -337,8 +386,8 @@ end
 						bank =   motif.rematch['p1_'..var..'font'][2],
 						align =  motif.rematch['p1_'..var..'font'][3],
 						text =   motif.rematch.p1_yes_text,
-							x =     motif.rematch.p1_offset[1] ,
-						y =    motif.rematch.p1_offset[2],
+									x =     motif.rematch[rematchtxtpos(1)..'p1_offset'][1],
+						y =    motif.rematch[rematchtxtpos(1)..'p1_offset'][2],
 						scaleX = motif.rematch.p1_scale[1],
 						scaleY =motif.rematch.p1_scale[2],
 					r =      motif.rematch['p1_'..var..'font'][4],
@@ -353,8 +402,8 @@ end
 						bank =   motif.rematch['p1_'..var2..'font'][2],
 						align =  motif.rematch['p1_'..var2..'font'][3],
 						text =   motif.rematch.p1_no_text,
-							x =     motif.rematch.p1_offset[1] + motif.rematch.p1_spacing[1],
-						y =    motif.rematch.p1_offset[2]+ motif.rematch.p1_spacing[2],
+								x =     motif.rematch[rematchtxtpos(1)..'p1_offset'][1] + motif.rematch[rematchtxtpos(1)..'p1_spacing'][1],
+						y =    motif.rematch[rematchtxtpos(1)..'p1_offset'][2]+ motif.rematch[rematchtxtpos(1)..'p1_spacing'][2],
 						scaleX = motif.rematch.p1_scale[1],
 						scaleY =motif.rematch.p1_scale[2],
 					r =      motif.rematch['p1_'..var2..'font'][4],
@@ -396,8 +445,8 @@ end
 						bank =   motif.rematch['p2_'..var..'font'][2],
 						align =  motif.rematch['p2_'..var..'font'][3],
 						text =   motif.rematch.p2_yes_text,
-							x =     motif.rematch.p2_offset[1] ,
-						y =    motif.rematch.p2_offset[2],
+									x =     motif.rematch[rematchtxtpos(2)..'p2_offset'][1],
+						y =    motif.rematch[rematchtxtpos(2)..'p2_offset'][2],
 						scaleX = motif.rematch.p2_scale[1],
 						scaleY =motif.rematch.p2_scale[2],
 					r =      motif.rematch['p2_'..var..'font'][4],
@@ -412,8 +461,8 @@ end
 						bank =   motif.rematch['p2_'..var2..'font'][2],
 						align =  motif.rematch['p2_'..var2..'font'][3],
 						text =   motif.rematch.p2_no_text,
-							x =     motif.rematch.p2_offset[1] + motif.rematch.p2_spacing[1],
-						y =    motif.rematch.p2_offset[2]+ motif.rematch.p2_spacing[2],
+									x =     motif.rematch[rematchtxtpos(2)..'p2_offset'][1] + motif.rematch[rematchtxtpos(2)..'p2_spacing'][1],
+						y =    motif.rematch[rematchtxtpos(2)..'p2_offset'][2]+ motif.rematch[rematchtxtpos(2)..'p2_spacing'][2],
 						scaleX = motif.rematch.p2_scale[1],
 						scaleY =motif.rematch.p2_scale[2],
 					r =      motif.rematch['p2_'..var2..'font'][4],
