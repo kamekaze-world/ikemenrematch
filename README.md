@@ -91,7 +91,7 @@ to use the victoryscreen setting look for this line in the start.lua
 ```if main.fadeType == 'fadein' and ((start.t_victory.textend and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time) or (main.f_input(main.t_players, {'pal', 's'}) then```
 
 and replace it with 
-```if main.fadeType == 'fadein' and ((start.t_victory.textend and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time) or (main.f_input(main.t_players, {'pal', 's'}) and ik_rematch.done[1] and ik_rematch.done[2])) then```
+```if main.fadeType == 'fadein' and ((start.t_victory.textend and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time) or (main.f_input(main.t_players, {'pal', 's'}) and ik_rematch.rematchend())) then```
 
 ## Wincount persistence
 
