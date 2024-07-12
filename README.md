@@ -40,6 +40,9 @@ pausegame=1
 starttime=0
 rematch.text = "Rematch?"
 rematch.offset=150,70
+;you can adjust the offset for any given gamemode with the format
+;<gamemode>.rematch.offset example below:
+;versus.rematch.offset =220,150
 rematch.font = 3,0,0
 rematch.scale = 2,2
 ;This will call the rematch screen on the victory screen instead of the end of match.
