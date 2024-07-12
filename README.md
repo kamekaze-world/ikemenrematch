@@ -1,4 +1,4 @@
-# IKEMEN GO Rematch 1.0
+# IKEMEN GO Rematch 1.1
 
 ## FOR IKEMEN GO .99 OR LATER ONLY
 To download, go to the code button and download the zip.
