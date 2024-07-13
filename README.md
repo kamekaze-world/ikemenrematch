@@ -1,4 +1,8 @@
-# IKEMEN GO Rematch 1.1
+# IKEMEN GO Rematch 1.2
+
+###Changelog:
+-fixed issue where victory music persists after reload
+-fixed issue where sounds dont play after victory screen reload
 
 ## FOR IKEMEN GO .99 OR LATER ONLY
 To download, go to the code button and download the zip.
