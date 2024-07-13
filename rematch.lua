@@ -310,7 +310,7 @@ end
 if not ik_rematch.override and motif.rematch.victoryscreen>=1 then
 
 local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle'))) and rematchmode()
-print(gamemode(),canRematch)
+
 if hv==0 and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time-5 then
 hv = start.t_victory.counter- start.t_victory.textcnt
 
@@ -341,7 +341,7 @@ end
 
 if (player(1) and  map('ik_rematch')>0  and starttime==0 or (roundstate()==-1 )) and (not ik_rematch.rematchend()) then
 if not fade and (roundstate()==-1  and starttime==0 ) then
-togglePause(true)
+--togglePause(true)
 fade=true
 end
 
@@ -489,6 +489,8 @@ end
 		if ik_rematch.rematchend() then
 		togglePause(false)
 		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
+		toggleNoSound(false)
+		start.bgmround=0
 		reload()
 		else
 		charMapSet(1,'ik_rematch',0,'set')
