@@ -1,4 +1,4 @@
-# IKEMEN GO Rematch 1.2
+# IKEMEN GO Rematch 1.22
 
 ### Changelog:
 -fixed issue where victory music persists after reload
