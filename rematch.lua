@@ -279,6 +279,7 @@ end
 		if ik_rematch.rematchend() then
 		togglePause(false)
 		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
+		start.bgmround=0
 		reload()
 		else
 		charMapSet(1,'ik_rematch',0,'set')
