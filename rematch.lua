@@ -279,8 +279,10 @@ end
 		if ik_rematch.rematchend() then
 		togglePause(false)
 		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
-		start.bgmround=0
+		
 		reload()
+		start.bgmround=0
+		start.f_stageMusic()
 		else
 		charMapSet(1,'ik_rematch',0,'set')
 		charMapSet(2,'ik_rematch',0,'set')
