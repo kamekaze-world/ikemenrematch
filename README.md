@@ -1,7 +1,8 @@
-# IKEMEN GO Rematch 1.25
+# IKEMEN GO Rematch 1.3
 
 ### Changelog:
 -updated to use new nightly logic
+-fixed commonstates logic overriding all other common states.
 
 ## FOR IKEMEN GO .99 OR LATER ONLY
 To download, go to the code button and download the zip.
