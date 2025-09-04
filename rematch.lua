@@ -1,11 +1,15 @@
---IKEMEN GO Rematch 1.1
+--IKEMEN GO Rematch 1.15
 --This mod adds rematch support to any fight unless specified otherwise
 --by turning on the ik_rematch.override value
 --All values otherwise depend on the screenpack values under [Rematch]
 --Use on nightly from January 2025 onwards
 
 --It will trigger when the starttime reaches 0, also based on your screenpack settings.
-modifyGameOption("Common.States", table.insert(gameOption("Common.States"), "external/mods/ik_rematch.zss"))
+
+local tt = gameOption("Common.States")
+table.insert(tt, "external/mods/ik_rematch.zss")
+modifyGameOption("Common.States", tt)
+
 ik_rematch = {}
 local starttime =0
 if motif.rematch ~= nil then
