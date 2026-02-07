@@ -1,0 +1,53 @@
+
+;------------------------------------------------------------------------- kame
+;to override this set "ik_rematch.override" to true in a lua mod file.
+[Rematch]
+enabled = 1
+accept.key = a, b, c, x, y, z, s
+;if 1, game will pause when rematch appears, use map "ik_rematch" to detect 
+;when rematch screen is active.
+pausegame = 0
+starttime = 175
+rematch.text = "Rematch?"
+rematch.offset = 300,340
+rematch.font = 5,0,0
+rematch.scale = .3,.3
+;This will call the rematch screen on the victory screen instead of the end of match.
+victoryscreen = 0
+p1.font = 1,0,0,128,128,128
+p1.active.font = 1,0,0,255,0,0
+p1.offset = 160,300
+p1.spacing = 0,40
+;you can adjust the offset for any given gamemode with the format
+;<gamemode>.p1.offset example below:
+;versus.p1.offset = 400,300
+;versus.p1.spacing = 0,20
+p1.scale = 1,1
+p1.yes.text = "Yes"
+p1.no.text = "No"
+p1.cursor.snd = 50,0
+p1.done.snd = 50,1
+
+p2.font = 1,0,0,128,128,128
+p2.active.font = 1,0,0,0,0,255
+p2.offset = 440,300
+p2.spacing = 0,40
+;you can adjust the offset for any given gamemode with the format
+;<gamemode>.p2.offset example below:
+;versus.p2.offset = 400,300
+;versus.p2.spacing = 0,20
+
+p2.yes.text = "Yes"
+p2.no.text = "No"
+p2.scale = 1,1
+p2.cursor.snd = 50,0
+p2.done.snd = 50,1
+
+;enter all game modes rematch will trigger on. 
+;All modes enabled if omitted.
+enabledmodes = "arcade","freebattle","teamcoop","versuscoop","versus"
+
+
+[RematchBGdef] 
+spr = ""
+bgclearcolor = 0, 0, 0
