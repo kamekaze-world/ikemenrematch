@@ -1,17 +1,25 @@
-# IKEMEN GO Rematch 1.3
+# IKEMEN GO Rematch 1.5
 
 ### Changelog:
 -updated to use new nightly logic
--fixed commonstates logic overriding all other common states.
 
 ## FOR IKEMEN GO .99 OR LATER ONLY
 To download, go to the code button and download the zip.
+
+### If you're using .99
+Use the rematch_old.lua, add the values below to your system.def
+
+### If you're using nightly before 12/2025
+Use the rematch_pre_1225.lua, add the values below to your system.def
+
+### If you're using nightly AFTER 12/2025
+Use the rematch_new.lua, keep the rematch.def in your mods folder
 
 ## Description
 This mod adds rematch support to any fight unless specified otherwise
 by turning on the ik_rematch.override value
 
-All values otherwise depend on the screenpack values under [Rematch]
+All values otherwise depend on the def file values under [Rematch]
 
 It will trigger when the starttime reaches 0, also based on your screenpack settings.
 
