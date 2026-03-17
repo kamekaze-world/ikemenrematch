@@ -16,7 +16,7 @@ Use the rematch_pre_1225.lua, add the values below to your system.def
 Use the rematch_new_pre3626.lua, keep the rematch.def in your mods folder
 
 ### If you're using nightly AFTER 3/6/2026
-Use the rematch_new_post_3626.lua, keep the rematch.def in your mods folder
+Use the rematch_new_post3626.lua, keep the rematch.def in your mods folder
 
 ## Description
 This mod adds rematch support to any fight unless specified otherwise
