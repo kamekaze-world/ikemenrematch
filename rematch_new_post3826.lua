@@ -217,7 +217,7 @@ end
 
 local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gamemode('watch') or gamemode('freebattle'))) and enabled
 
-if  matchover() then
+if  matchover() not ik_rematch.rematchend() then
 for i =1,2 do
 player(i)
 mapSet('ik_rematch_on',1,'set')
