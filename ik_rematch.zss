@@ -1,6 +1,6 @@
 [statedef -2]
 
-ignorehitpause if  roundstate=3 && map(ik_rematch_on) || roundstate=4 && map(ik_rematch)
+ignorehitpause if ( roundstate=3 && map(ik_rematch_on) || roundstate=4 && map(ik_rematch)) && teamside=[1,2]
 {
 assertspecial{flag:roundnotskip;flag2:roundnotover}
 
