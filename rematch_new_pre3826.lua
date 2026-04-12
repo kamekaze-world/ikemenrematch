@@ -1,4 +1,4 @@
---IKEMEN GO Rematch 1.5
+--IKEMEN GO Rematch 1.5.1
 --This mod adds rematch support to any fight unless specified otherwise
 --by turning on the ik_rematch.override value
 --All values otherwise depend on the rematch.def values under [Rematch]
@@ -291,7 +291,7 @@ end
 					ik_rematch.done[side]=true
 				end
 			
-				if (commandGetState(main.t_cmd[side], '$U')  or commandGetState(main.t_cmd[side], '$D'))   then
+				if (getInput({side}, '$U')  or getInput({side}, '$D'))   then
 				
 					sndPlay(motif.Snd, ik_rematch.sd.rematch['p'..side].cursor.snd[1], ik_rematch.sd.rematch['p'..side].cursor.snd[2])
 					if ik_rematch.cursor[side] then
@@ -483,7 +483,7 @@ end
 					ik_rematch.done[side]=true
 				end
 
-				if (commandGetState(main.t_cmd[side], '$U')  or commandGetState(main.t_cmd[side], '$D'))   then
+				if (getInput({side}, '$U')  or getInput({side}, '$D'))   then
 				
 					sndPlay(motif.Snd, ik_rematch.sd.rematch['p'..side].cursor.snd[1], ik_rematch.sd.rematch['p'..side].cursor.snd[2])
 					if ik_rematch.cursor[side] then
