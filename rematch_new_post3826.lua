@@ -82,8 +82,12 @@ end
 
 --It will trigger when the starttime reaches 0, also based on your screenpack settings.
 local tt = gameOption("Common.States")
-table.insert(tt, "external/mods/ik_rematch.zss")
-modifyGameOption("Common.States", tt)
+if not table.contains(tt, "external/mods/ik_rematch.zss") then
+print('not found')
+    table.insert(tt, "external/mods/ik_rematch.zss")
+    modifyGameOption("Common.States", tt)
+end
+
 
 ik_rematch = {}
 ik_rematch.sd=loadIni('external/mods/rematch.def')
