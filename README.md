@@ -18,6 +18,9 @@ Use the rematch_new_pre3826.lua, keep the rematch.def in your mods folder
 ### If you're using nightly AFTER 3/8/2026
 Use the rematch_new_post3826.lua, keep the rematch.def in your mods folder
 
+### If you're using nightly AFTER 5/28/2026
+Use the rematch_new_post52826.lua, keep the rematch.def in your mods folder
+
 ## Description
 This mod adds rematch support to any fight unless specified otherwise
 by turning on the ik_rematch.override value
