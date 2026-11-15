@@ -226,7 +226,7 @@ winadd=false
 hv =0
 end
 
-local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gameMode('watch') or gameMode('freebattle'))) and enabled
+local canRematch = (((player(1) and aiLevel()==0 and lose()) or (player(2) and aiLevel()==0 and lose()))  or (gameMode('watch') or gameMode('freebattle'))) and enabled
 
 if  matchOver() and not ik_rematch.rematchend() then
 for i =1,2 do
