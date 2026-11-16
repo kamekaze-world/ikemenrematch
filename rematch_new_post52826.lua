@@ -312,7 +312,7 @@ end
 	textImgDraw(ik_rematch.main.TextSpriteData)
 	for side =1,2 do
 	player(side) 
-		if (ailevel()==0 or gameMode('watch')) then
+		if (aiLevel()==0 or gameMode('watch')) then
 			if not ik_rematch.done[side] then
 					
 				if getInput({side}, ik_rematch.sd.rematch.accept.key) then
@@ -451,7 +451,7 @@ end
 
 if not ik_rematch.override and ik_rematch.sd.rematch.victoryscreen>=1 then
 
-local canRematch = (((player(1) and ailevel()==0 and lose()) or (player(2) and ailevel()==0 and lose()))  or (gameMode('watch') or gameMode('freebattle'))) and rematchmode()
+local canRematch = (((player(1) and aiLevel()==0 and lose()) or (player(2) and aiLevel()==0 and lose()))  or (gameMode('watch') or gameMode('freebattle'))) and rematchmode()
 
 if hv==0 and start.t_victory.counter - start.t_victory.textcnt >= ik_rematch.sd.victory_screen.time-5 then
 hv = start.t_victory.counter- start.t_victory.textcnt
@@ -520,7 +520,7 @@ end
 
 	textImgDraw(ik_rematch.main.TextSpriteData)
 	for side =1,2 do
-		if (player(side) and ailevel()==0 or gameMode('watch')) then
+		if (player(side) and aiLevel()==0 or gameMode('watch')) then
 				if not ik_rematch.done[side] then
 					
 				if getInput({side}, ik_rematch.sd.rematch.accept.key)  then
