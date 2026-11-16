@@ -98,8 +98,14 @@ end
 
 ik_rematch = {}
 ik_rematch.sd=loadIni('external/mods/rematch.def')
+local sff = false
+if ik_rematch.sd.sff then
+ sff = sffNew('external/mods/'..ik_rematch.sd.sff)
+end
 
---ik_rematch.sd.rematchbgdef.BGDef = bgNew('data/xjl/system.sff', 'external/mods/rematch.def', 'rematch', nil, 1)
+if sff then
+ik_rematch.sd.bg = bgNew(sff,'external/mods/rematch.def', 'rematchbg')
+end
 
 local starttime =0
 if ik_rematch.sd.rematch ~= nil then
@@ -188,9 +194,11 @@ end
 end
 
 local enabled =true
-
+local bgon=false
 function ik_rematch.run()
 
+
+	
 if ik_rematch.sd.rematch ==nil then
 return 
 end
@@ -268,6 +276,16 @@ end
 
 
 if (player(1) and  map('ik_rematch') >0 and starttime==0 ) and (not ik_rematch.rematchend()) then
+
+				if not bgon  and ik_rematch.sd.bg then
+bgon=true
+bgReset(ik_rematch.sd.bg)
+end
+	
+if ik_rematch.sd.bg then
+bgDraw(ik_rematch.sd.bg, 0)
+end
+
 if not fade and (ik_rematch.sd.rematch.pausegame>=1 ) then
 togglePause(true)
 fade=true
@@ -390,16 +408,18 @@ end
 		togglePause(false)
 		main.pauseMenu = false
 		closeMenu()
-		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
 		
+		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
+		bgon=false
 		reload()
 		else
 		for i =1,2 do
 		player(i)
 		mapSet('ik_rematch_on',0,'set')
-		endMatch()
-start.characterchange = true
+		bgon=false					
 		end
+		endMatch()
+		start.characterchange = true
 
 		end
 		end
@@ -413,7 +433,9 @@ end
  
  local victoryend=false
 function ik_rematch.victory() 
+	
 
+	
 if ik_rematch.sd.rematch ==nil then
 return 
 end
@@ -466,6 +488,16 @@ end
 
 
 if (player(1) and  map('ik_rematch')>0  and starttime==0 or (roundState()==-1 )) and (not ik_rematch.rematchend()) then
+if not bgon  and ik_rematch.sd.bg then
+bgon=true
+bgReset(ik_rematch.sd.bg)
+end
+	
+if ik_rematch.sd.bg then
+bgDraw(ik_rematch.sd.bg, 0)
+end
+
+
 if not fade and (roundState()==-1  and starttime==0 ) then
 --togglePause(true)
 fade=true
@@ -588,6 +620,7 @@ end
 		if ik_rematch.cursor[1] and ik_rematch.cursor[2] then
 		toggleNoSound(false)
 		start.bgmround=0
+		bgon=false
 		reload()
 		else
 		for i =1,2 do
