@@ -3,6 +3,7 @@
 ;to override this set "ik_rematch.override" to true in a lua mod file.
 [Rematch]
 enabled = 1
+;sff = rematch.sff ;.sff must be in same folder as mods 
 accept.key = a, b, c, x, y, z, s
 ;if 1, game will pause when rematch appears, use map "ik_rematch" to detect 
 ;when rematch screen is active.
