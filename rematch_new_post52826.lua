@@ -99,8 +99,8 @@ end
 ik_rematch = {}
 ik_rematch.sd=loadIni('external/mods/rematch.def')
 local sff = false
-if ik_rematch.sd.sff then
- sff = sffNew('external/mods/'..ik_rematch.sd.sff)
+if ik_rematch.sd.rematch.sff then
+ sff = sffNew('external/mods/'..ik_rematch.sd.rematch.sff)
 end
 
 if sff then
