@@ -104,7 +104,7 @@ if ik_rematch.sd.rematch.sff then
 end
 
 if sff then
-ik_rematch.sd.bg = bgNew(sff,'external/mods/rematch.def', 'rematch')
+ik_rematch.sd.bg = bgNew(sff,'external/mods/rematch.def', 'rematchbg')
 end
 
 local starttime =0
